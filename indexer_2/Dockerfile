@@ -1,7 +1,5 @@
 FROM golang:1.21.12-alpine
 
-RUN apk add --no-cache curl tar file
-
 RUN mkdir app
 
 WORKDIR /app

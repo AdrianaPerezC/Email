@@ -29,7 +29,6 @@ func GetEmails(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, fmt.Sprintf(`{"error":"%v"}`, err), http.StatusInternalServerError)
 		return
 	}
-
 	// Devolver los resultados
 	w.Header().Set("Content-Type", "application/json")
 	err = json.NewEncoder(w).Encode(searchResp)

@@ -17,7 +17,6 @@ func main() {
 	handler := shared.Cors(r)
 
 	fmt.Print("Escuchando correctamente el puerto- " + os.Getenv("PORT"))
-	fmt.Print("UREL ---->" + os.Getenv("FRONTEND_URL"))
 	http.ListenAndServe(os.Getenv("PORT"), handler)
 	if err := http.ListenAndServe(os.Getenv("PORT"), r); err != nil {
 		log.Fatalf("Error al iniciar el servidor: %v", err)
