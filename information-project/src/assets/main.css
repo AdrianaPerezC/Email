@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* @import './base.css'; */
+ 
+html * {
+    @apply box-border;
+  }
+body {
+    @apply m-0 p-0 font-sans bg-white text-base;
+  }
+  img {
+    @apply  max-w-full;
+  }
+
+  button,
+  input {
+    @apply font-sans text-base p-1.5;
+  }

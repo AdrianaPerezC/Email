@@ -1,0 +1,49 @@
+services:
+  app:
+    build:
+      context: ./information-project
+      args:
+        - PORT=3000
+        - VITE_API_URL=$API_URL
+    ports:
+      - "80:3000"
+    restart: on-failure
+    depends_on:
+      - api
+  api:
+    build:
+      context: ./api
+      args:
+        - PORT=:$API_PORT
+        - GIN_MODE=release
+    environment:
+      - ZINC_HOST=$ZINC_HOST
+      - ZINC_PORT=$ZINC_PORT
+      - ZINC_USER=$ZINC_USER
+      - ZINC_PASSWORD=$ZINC_PASSWORD
+      - FRONTEND_URL=$FRONTEND_URL
+      - ZINC_INDEX_NAME=$ZINC_INDEX_NAME
+    ports:
+      - "8080:8080"
+    restart: on-failure
+    depends_on:
+      - zincsearch
+  zincsearch:
+    image: public.ecr.aws/zinclabs/zincsearch:latest
+    volumes:
+      - ./data_zincsearch:/var/lib/postgresql/data
+    ports:
+      - "4080:4080"
+    environment:
+      - ZINC_FIRST_ADMIN_USER=$ZINC_USER
+      - ZINC_FIRST_ADMIN_PASSWORD=$ZINC_PASSWORD
+  indexer:
+    build:
+      context: ./indexer_2
+    restart: on-failure
+    depends_on:
+      - zincsearch
+    environment:
+      - ZINC_URL=$ZINC_URL
+      - ZINC_PASSWORD=$ZINC_PASSWORD
+      - ZINC_USER=$ZINC_USER
