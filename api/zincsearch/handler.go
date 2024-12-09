@@ -25,7 +25,7 @@ func SearchZinc(query models.SearchRequest) (models.ZincSearchResponse, error) {
 	    "_source": []
 	}`
 	// Construir la solicitud HTTP
-	req, err := http.NewRequest("POST", fmt.Sprintf("http://%s:%s/api/%s/_search", os.Getenv("ZINC_HOST"), os.Getenv("ZINC_PORT"), os.Getenv("ZINC_INDEX_NAME")), strings.NewReader(body))
+	req, err := http.NewRequest("POST", fmt.Sprintf("%s/api/%s/_search", os.Getenv("ZINC_URL"), os.Getenv("ZINC_INDEX_NAME")), strings.NewReader(body))
 	if err != nil {
 		return models.ZincSearchResponse{}, fmt.Errorf("error al crear la solicitud: %v", err)
 	}
