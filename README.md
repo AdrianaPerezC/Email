@@ -6,4 +6,4 @@
 
 ## Acceso al sitio desplegado en AWS EC2:
 
-- http://3.145.194.249/
+[- http://3.145.194.249/](http://3.139.78.222/)
